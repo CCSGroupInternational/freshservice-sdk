@@ -1,0 +1,25 @@
+{
+    "name": "ccsgroupinternational/freshservice-sdk",
+    "description": "PHP SDK for freshservice Api",
+    "keywords": [
+        "php",
+        "freshservice",
+        "api",
+        "sdk"
+    ],
+    "license": "GPL-3.0",
+    "minimum-stability": "beta",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Fabio Santos",
+            "email": "fsantos@ccsint.eu"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Freshservice\\": "src/"
+        }
+    },
+    "require": {}
+}
