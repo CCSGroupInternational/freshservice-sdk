@@ -21,5 +21,7 @@
             "Freshservice\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    }
 }

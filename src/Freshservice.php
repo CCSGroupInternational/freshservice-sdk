@@ -2,11 +2,15 @@
 
 namespace Freshservice;
 
+use Freshservice\Common\Resources\Connection;
+
 class Freshservice {
 
-    public function __construct()
+    public $client;
+
+    public function __construct(array $options = [])
     {
-        print "Hello World";
+        $this->client = new Connection($options);
     }
 
 }
