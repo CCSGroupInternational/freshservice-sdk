@@ -3,6 +3,7 @@
 namespace Freshservice;
 
 use Freshservice\Common\Resources\Connection;
+use Freshservice\Builders\Ticket;
 
 class Freshservice {
 
@@ -11,6 +12,11 @@ class Freshservice {
     public function __construct(array $options = [])
     {
         $this->client = new Connection($options);
+    }
+
+    public function tickets(): Ticket
+    {
+        return new Ticket($this->client);
     }
 
 }

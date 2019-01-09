@@ -3,7 +3,6 @@
 namespace Freshservice\Common\Resources;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 
 Class Connection
 {
