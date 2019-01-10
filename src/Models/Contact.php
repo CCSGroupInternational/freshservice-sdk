@@ -11,6 +11,8 @@ class Contact extends AbstractModel
     public $id;
     public $name;
     public $email;
+    public $address;
+    public $phone;
 
     protected $resourceKey = 'itil/requesters.json';
 

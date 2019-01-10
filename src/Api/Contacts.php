@@ -18,6 +18,8 @@ class Contacts extends AbstractApi
             'params'      => [
                 'name'     => $this->params->stringJson(),
                 'email'    => $this->params->stringJson(),
+                'address'  => $this->params->stringJson(),
+                'phone'    => $this->params->integerJson(),
             ]
         ];
     }
