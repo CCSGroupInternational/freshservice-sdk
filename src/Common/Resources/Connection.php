@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 Class Connection
 {
     public $connection;
-    private $expectedResponse = [
+    public static $expectedResponse = [
         'GET'    => 200,
         'POST'   => 201,
         'PUT'    => 204,
@@ -28,13 +28,13 @@ Class Connection
 
     public function sendRequest(array $options, array $params = null)
     {
-        $request = $this->requestBuilder($options,$params);
+        $request = $this->requestBuilder($options, $params);
         $response = $this->connection->request(
             $request['method'],
             $request['path'],
             $request['Options']
         );
-        $this->checkResponse($response,$request['method']);
+        $this->checkResponse($response,$request['method'], $request['statusCode']);
         $data = json_decode((string) $response->getBody(),true);
         return $data;
     }
@@ -43,6 +43,7 @@ Class Connection
     {
         $request['method'] = $options['method'];
         $request['path'] = $options['path'];
+        $request['statusCode'] = isSet($options['statusCode']) ? $options['statusCode'] : null;
         if (isset($options['params'])) {
             foreach ($options['params'] as $param => $values) {
                 if (isSet($params[$param])) {
@@ -51,7 +52,7 @@ Class Connection
                             $request['path'] = str_replace('{'.$param.'}',$params[$param],$request['path']);
                         }
                         else if ($values['location'] == Params::JSON) { // Body Params To send in JSON Format
-                            $request['Options']['body'][$param] = $params[$param];
+                            $body[$param] = $params[$param];
                         }
                     }
                     else {
@@ -60,16 +61,29 @@ Class Connection
                 }
             }
         }
-        if (isSet($request['Options']['body'])) {
-            $request['Options']['body'] = json_encode($request['Options']['body']);
+
+        if (isSet($body)) {
+            if (isset($options['resourceKey'])) {
+
+                $request['Options']['body'] = json_encode([
+                    $options['resourceKey'] => $body
+                ]);
+            }
+            else {
+                $request['Options']['body'] = json_encode($body);
+            }
         }
 
         return $request;
     }
 
-    private function checkResponse($response, $method)
+    private function checkResponse($response, $method, $statusCode)
     {
-        if ($this->expectedResponse[$method] != $response->getStatusCode()) {
+        if (!isSet($statusCode)) {
+            $statusCode = self::$expectedResponse[$method];
+        }
+
+        if ($statusCode != $response->getStatusCode()) {
             throw new \Exception('Unexpect Request Response. Status Code => '.$response->getReasonPhrase()." - Body => ".$response->getBody(), 1);
         }
     }

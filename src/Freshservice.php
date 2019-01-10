@@ -4,6 +4,7 @@ namespace Freshservice;
 
 use Freshservice\Common\Resources\Connection;
 use Freshservice\Builders\Ticket;
+use Freshservice\Builders\Contact;
 
 class Freshservice {
 
@@ -17,6 +18,11 @@ class Freshservice {
     public function tickets(): Ticket
     {
         return new Ticket($this->client);
+    }
+
+    public function contacts(): Contact
+    {
+        return new Contact($this->client);
     }
 
 }

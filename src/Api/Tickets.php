@@ -33,7 +33,7 @@ class Tickets extends AbstractApi
     {
         return [
             'method'  => 'POST',
-            'path'    => 'tickets',
+            'path'    => 'api/v2/tickets',
             'params'  => [
                 'description'  => $this->params->stringJson(),
                 'subject'      => $this->params->stringJson(),
