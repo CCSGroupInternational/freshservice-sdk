@@ -61,7 +61,6 @@ Class Connection
                 }
             }
         }
-
         if (isSet($body)) {
             if (isset($options['resourceKey'])) {
 
@@ -73,7 +72,6 @@ Class Connection
                 $request['Options']['body'] = json_encode($body);
             }
         }
-
         return $request;
     }
 

@@ -7,17 +7,8 @@ class Params
     const URL = 'url';
     const STRING_TYPE = "string";
     const JSON = 'json';
-//    const FILTER = 'filter';
-//    const BOOLEAN_TYPE = 'boolean';
     const INT_TYPE = 'integer';
-
-//    public function stringPath(): array
-//    {
-//        return [
-//            'type'        => self::STRING_TYPE,
-//            'location'    => self::URL,
-//        ];
-//    }
+    const ARRAY_TYPE = 'array';
 
     public function stringJson(): array
     {
@@ -27,14 +18,6 @@ class Params
         ];
     }
 
-//    public function booleanJson(): array
-//    {
-//        return [
-//            'type'        => self::BOOLEAN_TYPE,
-//            'location'    => self::JSON,
-//        ];
-//    }
-
     public function integerJson(): array
     {
         return [
@@ -43,12 +26,18 @@ class Params
         ];
     }
 
-//    public function stringFilter(): array
-//    {
-//        return [
-//            'type'        => self::STRING_TYPE,
-//            'location'    => self::FILTER,
-//        ];
-//    }
+    public function integerPath(): array
+    {
+        return [
+            'type'        => self::INT_TYPE,
+            'location'    => self::URL,
+        ];
+    }
 
+    public function requestedItemValues() {
+        return [
+            'type'        => self::ARRAY_TYPE,
+            'location'    => self::JSON,
+        ];
+    }
 }
